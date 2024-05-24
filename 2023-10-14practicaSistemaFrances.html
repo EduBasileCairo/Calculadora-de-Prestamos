@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Francés</title>
+</head>
+<body>
+    
+    <script>
+        //Calcula el valor de la cuota de un préstamo por sistema Francés
+        
+        //Para chequear el resultado con una fuente externa: http://www.ahe.es/bocms/sites/ahenew/simulador-hipotecario/
+        
+        //Definición de variables
+        var capital = Number(prompt("Introduzca el monto a financiar"));
+        var plazo = Number(prompt("Introduzca el plazo de amortización en meses"));
+        var tipos = Number(prompt("Introduzca el porcentaje/tipos de interés anual que afrontará"));
+        
+        //Operaciones intermedias
+
+        //Cálculo de la tasa mensual a aplicar /100
+        var tipoMensual = (tipos/12/100)
+        
+        //Cálculo del numerador de la fórmula de cuota del sistema francés
+        var numerador = (((1+tipoMensual)**plazo)*tipoMensual)
+        
+        //Cálculo del denominador de la fórmula de cuota del sistema francés
+        var denominador = (((1+tipoMensual)**plazo)-1)
+        
+        //Cálculo del cociente entre numerador y denominador
+        var cociente = (numerador/denominador)
+                
+        //Cálculo del producto entre el capital y el cociente
+        var cuotaCalculo = (capital*cociente)
+
+        //Redondeo de la cuota
+        var cuotaCalcRed = cuotaCalculo.toFixed(2)
+
+        //Fórmula polinómica sin desagregar que no arroja el resultado correcto. Estimo que por algún error de sintaxis que no he podido detectar
+        var cuota = (capital*((((1+tipoMensual)**plazo)*tipoMensual))/(((1+tipoMensual)**plazo)-1))
+        
+        //Controles parciales de resultados que se muestran por Consola
+        console.log ("El tipo mensual /100 es " + tipoMensual)
+        console.log ("El numerador es " + numerador)
+        console.log ("El denominador es " + denominador)
+        console.log ("El cociente es" + cociente)
+        //Resultado de la fórmula polinómica por consola (no la muestro por alert porque su resultado es incorrecto, como lo informo en el comentario de la misma fórmula)        
+        console.log ("El valor de la cuota de un préstamo de €" + capital + " a devolver en " + plazo + " meses " + "a una tasa anual del " + tipos + "% es €" + cuota)
+
+        //Mensaje al usuario con el resultado de la cuota que deberá afrontar
+        alert ("El valor de la cuota de un préstamo de €" + capital + " a devolver en " + plazo + " meses " + "a una tasa anual del " + tipos + "% es €" + cuotaCalcRed)
+        
+    </script>
+</body>
+</html>
